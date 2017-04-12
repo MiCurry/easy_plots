@@ -1,6 +1,6 @@
 
 
-# 1 Installing
+# Installing
 1. Install Docker through
 2/ Install Requirements
 ```
@@ -16,7 +16,7 @@ your user directory:
 
 For Windows:
 ```
-`//c/Users/[username]/<path-to-easy-plots>/media
+//c/Users/[username]/<path-to-easy-plots>/media
 ```
 
 For MacOS
@@ -33,7 +33,7 @@ there's any errors..
 docker -t basemap .
 ```
 
-# 2 Running
+# Running
 * Create plots by running (args in <> will have default values):
 ```
 python main.py plot <date> <time> <slice> <filename>
