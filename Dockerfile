@@ -25,6 +25,7 @@ RUN pip install web2py
 RUN pip install scipy
 RUN pip install numpy
 RUN pip install matplotlib
+RUN pip install pydap
 
 # Basemap
 WORKDIR /
@@ -51,7 +52,7 @@ RUN python setup.py install
 
 WORKDIR /home
 ADD functional_tests.py functional_tests.py
-ADD NAMS .
+ADD NAMS NAMS
 
 # TODO: Get wgrib2 to work
 # Wgrib2

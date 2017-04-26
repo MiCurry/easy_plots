@@ -1,5 +1,12 @@
 
 
+
+# Todo
+1. download
+2. plot-2d
+3. Html
+
+
 # 1 Installing
 1. Install Docker through
 2/ Install Requirements

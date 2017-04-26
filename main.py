@@ -4,11 +4,11 @@ import os.path as path
 import ftplib
 import argparse
 import datetime
+
 import docker
 
 
 CONFIGFILE = ".config"
-MOUNT = ""
 
 def init():
     if path.isfile(CONFIGFILE):
@@ -18,7 +18,7 @@ def init():
             print "A mount directory was not specified in the .config file"
             sys.exit(0) # Error
         print "Your mounting dir is: ", MOUNT
-        return 1 # Success
+        return MOUNT # Success
     print "No .config file found please add one in the current director!"
     sys.exit(0) # Error
 
@@ -31,9 +31,8 @@ def init():
     slice - int- Time slice from the date specified -
 """
 if __name__ == "__main__":
-    init()
-
-    client = docker.from_env()
+    MOUNT = ""
+    MOUNT = init()
 
     parser = argparse.ArgumentParser(description='Easy NAMS Plotting.')
     parser.add_argument('task',
@@ -56,23 +55,28 @@ if __name__ == "__main__":
                         type=int)
     args = parser.parse_args()
 
-    out = client.containers.run('basemap', 'python plot.py ' + args.task)
+    print MOUNT
+    # Create Docker Container
+    client = docker.from_env()
+    client.containers.run('basemap', 'ls')
 
-    if args.task == "test":
+    container = client.create_container(
+        image = "basemap",
+        name = "easy_plot",
+        volumes=[MOUNT],
+        host_config=client.create_host_config(binds={
+            '/home/NAMS/data':{
+                'bind' : MOUNT,
+                'mode' : 'rw',
+            }
+        })
+    )
+
+    if args.task == "download":
         #client.containers.run('basemap', 'python plot.py test')
+        client.containers.run('basemap', 'python plot.py ' + args.task)
 
-        out = client.containers.run('basemap', 'python plot.py ' + args.task)
-        print out
-        print type(out)
-        """
-        print client.containers.run('basemap',
-                                        "python plot.py " \
-                                        + str(args.task) \
-                                        + "-d"  + str(args.date) \
-                                        + "-t"  + str(args.time) \
-                                        + "-s" + str(args.slice) \
-                                        + "-l" + str(args.layer) \
-                                        + "-f" + str(args.file))
-        """
 
+
+    print ""
     sys.exit(0)
