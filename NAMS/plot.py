@@ -28,8 +28,19 @@ def test_plot():
                    ax=ax, epsg=4326)
     return 1
 
+def load_file(file_name):
+    #Gives a netcdf file object with default mode of reading permissions only
+    return netcdf.netcdf_file(
+        )
+    )
+
 # IDEA: Make this a class
 def plot(date="TODAY", time=0, layer=0, fileName="NONE"):
+    if fileName == "NONE":
+        fileName = download(north = "46.5", south = "41.7", east = "-116", west = "-125")
+        data_file = load_file()
+
+
     """ Makes a nams plot of the State of Oregon
 
     date -
@@ -57,7 +68,7 @@ def plot(date="TODAY", time=0, layer=0, fileName="NONE"):
     var_v = 'v-component_of_wind_height_above_ground'
     landMask = 'Land_cover_0__sea_1__land_surface'
 
-    data_file = open_url(URL)
+    data_file =
 
     wind_u = data_file[var_u][time+104, 0, :, :]
     wind_v = data_file[var_v][time+104, 0, :, :]

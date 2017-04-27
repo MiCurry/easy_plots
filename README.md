@@ -40,7 +40,13 @@ docker run -v [your-mount-direcotyr]:/home/data basemap <command>
 
 Here is mine as an example:
 ```
-docker run -v //c/user/miles/projects/easy_plots/nams/data:/home/NAMS/data basemap <command-line-options>
+docker run -v /c/Users/Miles/Projects/easy_plots/data:/home/data basemap <command-line-options>
 ```
 
-# Commands
+# Testing Commands
+
+```
+docker run -v /c/Users/Miles/Projects/easy_plots/data:/home/data basemap touch data/new_file.txt # Create a test file
+docker run -v /c/Users/Miles/Projects/easy_plots/data:/home/data basemap ls data  # See if our file was created
+```
+Then see if the `new_file.txt` was created in /c/Users/Miles/Projects/easy_plots/data.
