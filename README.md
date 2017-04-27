@@ -1,5 +1,14 @@
 
 
+<<<<<<< HEAD
+=======
+# Installing
+1. Install Docker through
+2/ Install Requirements
+```
+pip install -y requirements
+```
+>>>>>>> master
 
 # Todo
 1. download
@@ -14,7 +23,6 @@ in a user folder
 ```
 git clone https://github.com/MiCurry/easy_plots.git
 ```
-
 2. Install Docker if you haven't.
 
 3. Build the Docker image by running. This will take some time. Let me know if
@@ -42,7 +50,6 @@ The basic structure of the run command is:
 docker run -v [your-mount-direcotyr]:/home/data basemap <command>
 ```
 
-Here's mine as an example:
 ```
 docker run -v //c/user/miles/projects/easy_plots/nams/data:/home/NAMS/data basemap <command-line-options>
 ```
