@@ -51,8 +51,8 @@ WORKDIR basemap-1.0.7
 RUN python setup.py install
 
 WORKDIR /home
-ADD functional_tests.py functional_tests.py
-ADD NAMS NAMS
+ADD NAMS .
+ADD data data
 
 # TODO: Get wgrib2 to work
 # Wgrib2

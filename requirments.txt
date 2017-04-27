@@ -1,2 +1,0 @@
-#TODO: Get a list of requirments that are needed to install
-dockerpy
