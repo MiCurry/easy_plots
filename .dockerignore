@@ -1,0 +1,6 @@
+./docs
+README.md
+.gitignore
+./.git
+*.nc
+*.png

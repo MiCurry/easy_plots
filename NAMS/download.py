@@ -13,14 +13,13 @@ def download(north, south, east, west):
     begin = str(current_time) + 'T00%3A00%3A00Z'
     end = str(end_time) + 'T00%3A00%3A00Z'
 
-    url = 'http://thredds.ucar.edu/thredds/ncss/grib/NCEP/NAM/CONUS_12km/conduit/Best?var=u-component_of_wind_height_above_ground&var=v-component_of_wind_height_above_ground&north='+northk+'&west=-'+west+'&east=-'+east+'&south='+south+'&horizStride=1&time_start='+begin+'&time_end='+end+'&timeStride=1&vertCoord=&addLatLon=true&accept=netcdf'
+    url = 'http://thredds.ucar.edu/thredds/ncss/grib/NCEP/NAM/CONUS_12km/conduit/Best?var=u-component_of_wind_height_above_ground&var=v-component_of_wind_height_above_ground&north='+north+'&west='+west+'&east='+east+'&south='+south+'&horizStride=1&time_start='+begin+'&time_end='+end+'&timeStride=1&vertCoord=&addLatLon=true&accept=netcdf'
 
 
     local_filename = "/home/data/{0}_{1}.nc".format("WIND", current_time)
-    print "FileName: ", local_filename
     urllib.urlretrieve(url, local_filename)
-
-    print "Successful!"
+    print "Downloaded File: ", local_filename
+    return local_filename
 
 
 north = "46.5"; south = "41.7"; east = "-116"; west = "-125";
