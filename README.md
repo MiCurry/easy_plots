@@ -7,7 +7,7 @@
 # Installing
 1. Clone this repository. If you're on Windows or MacOS make sure you clone it somewhere
 in a user folder
-(Windows: ://C/users/username/easy_plots, MacOS:/Users/easy_plots/media).
+(Windows: `//C/users/username/easy_plots`, MacOS: `/Users/easy_plots/media`).
 ```
 git clone https://github.com/MiCurry/easy_plots.git
 ```
@@ -38,6 +38,7 @@ The basic structure of the run command is:
 docker run -v [your-mount-direcotyr]:/home/data basemap <command>
 ```
 
+Here is mine as an example:
 ```
 docker run -v //c/user/miles/projects/easy_plots/nams/data:/home/NAMS/data basemap <command-line-options>
 ```
