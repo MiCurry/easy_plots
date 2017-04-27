@@ -1,15 +1,3 @@
-
-
-<<<<<<< HEAD
-=======
-# Installing
-1. Install Docker through
-2/ Install Requirements
-```
-pip install -y requirements
-```
->>>>>>> master
-
 # Todo
 1. download
 2. plot-2d
