@@ -17,10 +17,6 @@ RUN yum install -y python-devel
 RUN yum install -y python-matplotlib
 RUN yum install -y libpng-devel
 
-# TODO: Move web2py to a new container
-# Install web2py
-RUN pip install web2py
-
 # Install Scipy Stack
 RUN pip install scipy
 RUN pip install numpy
@@ -51,7 +47,12 @@ WORKDIR basemap-1.0.7
 RUN python setup.py install
 
 WORKDIR /home
-ADD NAMS .
+
+# Add New Pip Modules here... for now
+RUN pip install defusedxml
+
+ADD NAMS NAMS
+add OSUROMS OSUROMS
 ADD data data
 
 # TODO: Get wgrib2 to work

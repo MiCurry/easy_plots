@@ -16,7 +16,7 @@ git clone https://github.com/MiCurry/easy_plots.git
 3. Build the Docker image by running. This will take some time. Let me know if
 there's any errors..
 ```
-docker -t basemap .
+docker build -t basemap .
 ```
 
 # Running
