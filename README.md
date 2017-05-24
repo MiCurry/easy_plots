@@ -1,8 +1,10 @@
-# Todo
-1. download
-2. plot-2d
-3. Html
+# easy_plots
 
+Basemap is a large package to install and I wanted to have an easy way to make 
+basemap plots on a varitey of different machines, so I created a Dockerfile with
+basemap, numpy, matplotlib etc.
+
+# Todo
 
 # Installing
 1. Clone this repository. If you're on Windows or MacOS make sure you clone it somewhere
