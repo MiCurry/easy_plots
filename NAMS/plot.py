@@ -33,7 +33,8 @@ def test_plot():
     return 1
 
 def load_file(date, height):
-    return netcdf.netcdf_file("data/files/WIND-"+str(date)+"_"+str(height)+".nc")
+    print "Loading File", "data/WIND-"+str(date)+".nc"
+    return netcdf.netcdf_file("data/WIND-"+str(date)+".nc")
 
 """ Makes a nams plot of the State of Oregon
 
@@ -55,11 +56,12 @@ def plot(date="TODAY",
                         height = str(height))
 
     data_file = load_file(date, height)
-    times = data_file.variables['time1']
+    times = data_file.variables['time']
     ref_time = datetime.strptime(times.units, 'Hour since %Y-%m-%dT%H:%M:%SZ')
 
     """ Plotting """
     for i in range(times.shape[0]):
+    #for i in range(4):
 
         # Create the Plot Figure
         fig = pyplot.figure()
@@ -78,11 +80,8 @@ def plot(date="TODAY",
         x, y = bmap(lon, lat)
 
         # Pull our the u and v vectors
-        wind_u = data_file.variables['u-component_of_wind_height_above_ground']
         wind_v = data_file.variables['v-component_of_wind_height_above_ground']
-        hag3 = data_file.variables['height_above_ground3']
-
-        data_file.close()
+        wind_u = data_file.variables['u-component_of_wind_height_above_ground']
 
         # Here we grab only the times we want to plot
         wind_u = wind_u[i, 0, :, :] # All times of u
@@ -93,11 +92,18 @@ def plot(date="TODAY",
 
         bmap.drawcoastlines()
         bmap.drawstates()
+        print "times[i]: ", times[i]
+        print "i :", i
 
-        plot_time = ref_time + timedelta(hours=times[i])
-        plot_time = replace(plot_time, ':', '-', 3)
+        date = ref_time + timedelta(hours=float(times[i]))
+        print "Date:", date
+        plot_date = str(date.date())
+        plot_time = str(date.time())
+        plot_date = plot_date.replace(":", "-", 3)
+        plot_time = plot_time.replace(":", "-", 3)
 
-        filename = "/home/data/plots/WIND_plot-{0}-{1}.png".format(plot_time.date())
+        filename = "/home/data/WIND-{0}-{1}.png".format(plot_date, plot_time)
+        print filename
 
         # here is where the plot is created
         bmap.barbs(x[::downsample_ratio, ::downsample_ratio],
@@ -147,6 +153,7 @@ if __name__ == "__main__":
     if args.task == "download":
         download(north, south, east, west, "0")
     if args.task == "plot":
+        print "Plotting!"
         plot(height=args.height)
     elif args.task == "test":
         test()

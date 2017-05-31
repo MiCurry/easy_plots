@@ -25,9 +25,9 @@ def download(north, south, east, west, height):
 
     print "Downloading...."
 
-    url = 'http://thredds.ucar.edu/thredds/ncss/grib/NCEP/NAM/CONUS_12km/conduit/Best?var=u-component_of_wind_height_above_ground&var=v-component_of_wind_height_above_ground&north='+north+'&west='+west+'&east='+east+'&south='+south+'&horizStride=1&time_start='+begin+'&time_end='+end+'&timeStride=1&addLatLon=true&='+str(height)+'&accept=netcdf'
+    url = 'http://thredds.ucar.edu/thredds/ncss/grib/NCEP/NAM/CONUS_12km/conduit/Best?var=u-component_of_wind_height_above_ground&var=v-component_of_wind_height_above_ground&north='+north+'&west='+west+'&east='+east+'&south='+south+'&horizStride=1&time_start='+begin+'&time_end='+end+'&timeStride=1&addLatLon=true&accept=netcdf'
 
-    fileName = "/home/data/files/{0}-{1}_{2}.nc".format("WIND", current_time, height)
+    fileName = "/home/data/{0}-{1}.nc".format("WIND", current_time)
     urllib.urlretrieve(url, fileName)
     print "Downloaded File: ", fileName
     return file

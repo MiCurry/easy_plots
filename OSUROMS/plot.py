@@ -1,25 +1,35 @@
 import numpy as np
 import scipy
 import matplotlib
+import argparse
+import numpy
 matplotlib.use('Agg') # Disables the need for the monitor
 
 import matplotlib.pyplot as plt
 from mpl_toolkits.basemap import Basemap
+from scipy.io import netcdf
+from netCDF4 import Dataset
+
 
 from download import download
 
 def cel2fahr(temp):
     return temp * 1.8 + 32
 
+def load_file():
+    #return netcdf.netcdf_file("/home/data/ROMS_2017-05-11.nc")
+    return Dataset("ocean_his_4474_01-Apr-2017.nc.nc")
 
-def sst_function(time_index,
-                 downsample_ratio,
+def sst_function(time_index=0,
+                 downsample_ratio=5,
                  north=47.499,
                  south=40.5840806224,
                  east=-123.726199391,
                  west=-129.9):
 
-    vectorized_conversion = numpy.vectorize(celsius_to_fahrenheit)
+    data_file = load_file()
+
+    vectorized_conversion = numpy.vectorize(cel2fahr)
 
     fig = pyplot.figure()
     ax = fig.add_subplot(111)
@@ -60,22 +70,6 @@ def sst_function(time_index,
     bmap.drawmapboundary(linewidth=0.0, ax=ax)
     overlay = bmap.contourf(x, y, surface_temp, color_levels, ax=ax, extend='both', cmap=get_modified_jet_colormap())
 
-    # Todo: Colorbar
-    """ 
-    # add colorbar.
-    #-------------------------------------------------------------------------
-    cbar = pyplot.colorbar(overlay, orientation='horizontal', cax=key_ax)
-    cbar.ax.tick_params(labelsize=10)
-    cbar.ax.xaxis.label.set_color('white')
-    cbar.ax.xaxis.set_tick_params(labelcolor='white')
-
-    locations = numpy.arange(0, 1.01, 1.0/(NUM_COLOR_LEVELS))[::10]    # we just want every 10th label
-    float_labels = numpy.arange(min_temp, max_temp + 0.01, contour_range_inc)[::10]
-    labels = ["%.1f" % num for num in float_labels]
-    cbar.ax.xaxis.set_ticks(locations)
-    cbar.ax.xaxis.set_ticklabels(labels)
-    cbar.set_label("Fahrenheit")
-    """
 
 # We are not using the Salt model at this time.
 #-------------------------------------------------------------------------
@@ -201,7 +195,7 @@ if __name__ == "__main__":
     if args.task == "download":
         download("0")
     if args.task == "plot":
-        plot(height=args.height)
+        sst_function()
     elif args.task == "test":
         test()
         sys.exit(0)

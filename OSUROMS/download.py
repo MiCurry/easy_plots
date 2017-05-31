@@ -52,12 +52,14 @@ def download():
                 files_to_retrieve.append((server_filename, model_date, modified_datetime))
 
     new_file_ids = []
+    print files_to_retrieve
+    print len(files_to_retrieve)
 
     for server_filename, model_date, modified_datetime in files_to_retrieve:
         url = urljoin(URL, server_filename)
         local_filename = "{0}_{1}.nc".format("ROMS", model_date)
         print "Retrieving: " + str(local_filename)
-        urllib.urlretrieve(url=url, filename=os.path.join("/home/data/files/", local_filename)) # this also needs a try/catch
+        urllib.urlretrieve(url=url, filename=os.path.join("/home/data/", local_filename)) # this also needs a try/catch
 
 
     return #Filename
